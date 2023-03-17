@@ -8,6 +8,6 @@ body:
     attributes:
       label: Description 
       description: "Describe what needs to be added or changed in which document."
-   - type: input
+  - type: input
     attributes:
       label: Estimated time to complete this task
