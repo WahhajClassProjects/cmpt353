@@ -8,6 +8,6 @@ body:
     attributes:
       label: Description 
       description: "Describe what needs to be implemented."
-   - type: input
+  - type: input
     attributes:
       label: Estimated time to complete this task
