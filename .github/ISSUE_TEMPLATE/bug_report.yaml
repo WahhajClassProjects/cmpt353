@@ -24,3 +24,6 @@ body:
     attributes:
       label: Pictures
       description: If you have any screenshots showing the bug, please place them here.
+  - type: input
+    attributes:
+      label: Estimated time to complete this task
