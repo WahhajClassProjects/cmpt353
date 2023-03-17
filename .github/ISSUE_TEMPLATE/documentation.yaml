@@ -1,0 +1,13 @@
+name: Documentation
+description: Open an issue to add or edit documents
+title: "[Document]:  " 
+labels: ["Type: Documentation", "Status: Pending"]
+
+body: 
+  - type: textarea
+    attributes:
+      label: Description 
+      description: "Describe what needs to be added or changed in which document."
+   - type: input
+    attributes:
+      label: Estimated time to complete this task
