@@ -1,0 +1,13 @@
+name: DevOps
+description: Open an issue related to a DevOps task
+title: "[DevOps]:  " 
+labels: ["Type: DevOps", "Status: Pending"]
+
+body: 
+  - type: textarea
+    attributes:
+      label: Description 
+      description: "Describe what needs to be implemented."
+   - type: input
+    attributes:
+      label: Estimated time to complete this task
