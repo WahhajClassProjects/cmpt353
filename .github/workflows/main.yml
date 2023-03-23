@@ -1,7 +1,7 @@
 name: "Main Pipeline"
 
 on:
-  workflow_call:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -10,7 +10,7 @@ on:
       - main
 
 jobs:
-  job-name: "Build Backend"
+  Build_Backend:
     runs-on: ubuntu-latest
     steps:
       - name: Login to GitHub Container Registry
@@ -21,7 +21,6 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Build Node
-        uses: actions/checkoout@v3
         run:
           docker build -t backend .
         working-directory: ./backend
