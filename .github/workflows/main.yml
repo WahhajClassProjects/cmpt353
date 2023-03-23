@@ -13,11 +13,21 @@ jobs:
   job-name: "Build Backend"
     runs-on: ubuntu-latest
     steps:
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          
       - name: Build Node
         uses: actions/checkoout@v3
         run:
-          docker build -t backend
+          docker build -t backend .
         working-directory: ./backend
-          
+      
+      - name: Push Image to GitHub Container Registry
+        run:
+          docker push backend
   
     
