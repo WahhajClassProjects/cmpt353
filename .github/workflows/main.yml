@@ -23,7 +23,7 @@ jobs:
       - name: Build Node
         run:
           docker build -t backend .
-        working-directory: ./backend
+        working-directory: backend
       
       - name: Push Image to GitHub Container Registry
         run:
