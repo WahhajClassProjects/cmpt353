@@ -1,0 +1,23 @@
+name: "Main Pipeline"
+
+on:
+  workflow_call:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  job-name: "Build Backend"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Node
+        uses: actions/checkoout@v3
+        run:
+          docker build -t backend
+        working-directory: ./backend
+          
+  
+    
