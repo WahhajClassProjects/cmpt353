@@ -28,9 +28,4 @@ jobs:
         run:
           docker build -t ghcr.io/wahhajclassprojects/cmpt353/server:latest .
         working-directory: backend
-      
-      - name: Push Image to GitHub Container Registry
-        run:
-          docker push ghcr.io/wahhajclassprojects/cmpt353/server:latest
-  
-    
+

@@ -1,0 +1,14 @@
+.messageBoxContainer {
+    width: 100%;
+    height: 100px;
+    display: flex;
+}
+
+.messageTextArea {
+    width: 100%;
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+}
+
+.submitMessageButton {
+    margin-top: 5px; /* Add some space between the textarea and the button */
+}
