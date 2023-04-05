@@ -1,0 +1,46 @@
+name: Auto Update Issue To Status: Complete
+
+on:
+  issues:
+    types:
+      - closed
+
+jobs:
+  update_label:
+    runs-on: ubuntu-latest
+    if: contains(github.event.issue.labels.*.name, 'Status: In Progress')
+
+    steps:
+      - name: Change issue label
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issueNumber = context.issue.number;
+            const repo = context.repo;
+
+            const oldLabel = 'Status: In Progress';
+            const newLabel = 'Status: Complete';
+
+            // Remove the old label
+            await github.rest.issues.removeLabel({
+              ...repo,
+              issue_number: issueNumber,
+              name: oldLabel,
+            });
+
+            // Add the new label
+            await github.rest.issues.addLabels({
+              ...repo,
+              issue_number: issueNumber,
+              labels: [newLabel],
+            });
+
+            // Add a comment
+            await github.rest.issues.createComment({
+              ...repo,
+              issue_number: issueNumber,
+              body: `Issue #${issueNumber} is now closed. Label changed from "${oldLabel}" to "${newLabel}".`,
+            });
+
+            console.log(`Issue #${issueNumber} label changed from "${oldLabel}" to "${newLabel}".`);
