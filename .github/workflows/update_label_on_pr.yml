@@ -1,0 +1,60 @@
+name: Auto Update Issue To Review Needed
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  update_label:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.body != '' && contains(github.event.pull_request.body, 'Closes #')
+
+    steps:
+      - name: Change issue label
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prBody = context.payload.pull_request.body;
+            const issueNumberMatch = prBody.match(/Closes #(\d+)/);
+            
+            if (!issueNumberMatch) {
+              console.log('No issue number found in the pull request body.');
+              return;
+            }
+
+            const issueNumber = parseInt(issueNumberMatch[1], 10);
+            const repo = context.repo;
+
+            const oldLabel = 'Status: In Progress';
+            const newLabel = 'Status: Review Needed';
+
+            const issueLabels = await github.rest.issues.listLabelsOnIssue({
+              ...repo,
+              issue_number: issueNumber,
+            });
+
+            const hasOldLabel = issueLabels.data.find(label => label.name === oldLabel);
+
+            if (!hasOldLabel) {
+              console.log(`Issue #${issueNumber} does not have the "${oldLabel}" label.`);
+              return;
+            }
+
+            // Remove the old label
+            await github.rest.issues.removeLabel({
+              ...repo,
+              issue_number: issueNumber,
+              name: oldLabel,
+            });
+
+            // Add the new label
+            await github.rest.issues.addLabels({
+              ...repo,
+              issue_number: issueNumber,
+              labels: [newLabel],
+            });
+
+            console.log(`Issue #${issueNumber} label changed from "${oldLabel}" to "${newLabel}".`);
