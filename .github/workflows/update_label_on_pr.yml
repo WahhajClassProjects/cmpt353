@@ -9,7 +9,6 @@ on:
 jobs:
   update_label:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.body != '' && contains(github.event.pull_request.body, format('Closes {0}','#'))
 
     steps:
       - name: Change issue label
