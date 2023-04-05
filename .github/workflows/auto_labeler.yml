@@ -27,7 +27,7 @@ jobs:
             const oldLabel = 'Status: Available';
             const newLabel = 'Status: In Progress';
 
-            const issueLabels = await github.rest.listLabelsOnIssue({
+            const issueLabels = await github.rest.issues.listLabelsOnIssue({
               ...repo,
               issue_number: issueNumber,
             });
@@ -40,14 +40,14 @@ jobs:
             }
 
             // Remove the old label
-            await github.rest.removeLabel({
+            await github.rest.issues.removeLabel({
               ...repo,
               issue_number: issueNumber,
               name: oldLabel,
             });
 
             // Add the new label
-            await github.rest.addLabels({
+            await github.rest.issues.addLabels({
               ...repo,
               issue_number: issueNumber,
               labels: [newLabel],
