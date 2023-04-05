@@ -1,4 +1,4 @@
-name: Auto Update Issue Label
+name: Auto Update Issue To In Progress
 
 on:
   create:
