@@ -14,7 +14,6 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const github = new GitHub(github_token);
             const branchName = context.ref.replace('refs/heads/', '');
             const issueNumber = parseInt(branchName.split('-')[0], 10);
 
