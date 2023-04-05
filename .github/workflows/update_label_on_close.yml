@@ -1,4 +1,4 @@
-name: Auto Update Issue To Status: Complete
+name: Auto Update Issue To Complete
 
 on:
   issues:
