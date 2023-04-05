@@ -1,0 +1,55 @@
+name: Auto Update Issue Label
+
+on:
+  create:
+
+jobs:
+  auto_update_label:
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/heads/') && contains(github.ref, '-')
+
+    steps:
+      - name: Change issue label
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const branchName = context.ref.replace('refs/heads/', '');
+            const issueNumber = parseInt(branchName.split('-')[0], 10);
+
+            if (isNaN(issueNumber)) {
+              console.log(`Invalid issue number extracted from the branch name "${branchName}".`);
+              return;
+            }
+
+            const repo = context.repo;
+
+            const oldLabel = 'Status: Available';
+            const newLabel = 'Status: In Progress';
+
+            const issueLabels = await github.issues.listLabelsOnIssue({
+              ...repo,
+              issue_number: issueNumber,
+            });
+
+            const hasOldLabel = issueLabels.data.find(label => label.name === oldLabel);
+
+            if (!hasOldLabel) {
+              console.log(`Issue #${issueNumber} does not have the "${oldLabel}" label.`);
+              return;
+            }
+
+            // Remove the old label
+            await github.issues.removeLabel({
+              ...repo,
+              issue_number: issueNumber,
+              name: oldLabel,
+            });
+
+            // Add the new label
+            await github.issues.addLabels({
+              ...repo,
+              issue_number: issueNumber,
+              labels: [newLabel],
+            });
+
+            console.log(`Issue #${issueNumber} label changed from "${oldLabel}" to "${newLabel}".`);
