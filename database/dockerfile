@@ -1,0 +1,12 @@
+FROM mysql:latest
+
+ENV MYSQL_ROOT_PASS password
+ENV MYSQL_DATABASE chatdb
+ENV MYSQL_USER ROOT
+ENV MYSQL_PASSWORD abc
+
+EXPOSE 3306
+
+VOLUME /var/lib/mysql
+
+CMD ["mysqld"]

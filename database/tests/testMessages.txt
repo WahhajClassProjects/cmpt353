@@ -1,0 +1,30 @@
+21,2,u3,1.65018E+12,,104,105,Compatible executive project
+22,2,u3,1.65018E+12,21,197,148,Quality-focused asynchronous strategy
+23,2,u3,1.65019E+12,,157,168,Expanded value-added parallelism
+24,2,u4,1.6503E+12,23,2,110,Universal zero tolerance solution
+25,2,u4,1.65031E+12,,131,117,Programmable interactive orchestration
+26,3,u3,1.65037E+12,,187,15,Customer-focused bottom-line capacity
+27,3,u1,1.65038E+12,,52,166,Centralized attitude-oriented collaboration
+28,4,u1,1.65042E+12,,104,148,Seamless bi-directional portal
+29,3,u2,1.65043E+12,,187,185,Enhanced human-resource knowledge user
+30,5,u4,1.65056E+12,,91,121,Configurable zero administration customer loyalty
+31,5,u2,1.65058E+12,30,22,129,Total responsive contingency
+32,4,u2,1.65059E+12,,17,153,Focused grid-enabled attitude
+33,3,u2,1.6506E+12,,145,198,Synergized 24 hour emulation
+34,2,u4,1.65066E+12,,154,63,Adaptive optimizing function
+35,3,u3,1.65073E+12,33,5,34,Fundamental exuding portal
+36,3,u5,1.65074E+12,,21,131,Total interactive info-mediaries
+37,3,u4,1.65075E+12,,0,61,Distributed impactful projection
+38,3,u5,1.65077E+12,35,99,0,Robust homogeneous strategy
+39,5,u5,1.65082E+12,31,149,147,Managed discrete extranet
+40,4,u3,1.65085E+12,,82,194,Up-sized user-facing parallelism
+41,5,u1,1.6509E+12,39,75,12,Open-architected user-facing hierarchy
+42,5,u2,1.65091E+12,41,149,84,Streamlined 5th generation access
+43,4,u1,1.65092E+12,,120,114,Object-based eco-centric framework
+44,3,u3,1.65096E+12,38,101,163,Integrated intermediate throughput
+45,3,u1,1.65098E+12,37,31,52,Devolved bi-directional pricing structure
+46,2,u3,1.65104E+12,,94,75,Stand-alone didactic success
+47,3,u2,1.65109E+12,,186,0,Phased transitional framework
+48,2,u2,1.65109E+12,23,74,137,Reverse-engineered mission-critical software
+49,4,u3,1.65109E+12,,190,108,Synergized modular ability
+50,3,u1,1.65109E+12,26,65,82,Progressive didactic interface

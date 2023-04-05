@@ -1,0 +1,20 @@
+1,1,u1,1.64914E+12,,25,66,Secured local challenge
+2,1,u2,1.64918E+12,1,11,86,Reactive demand-driven neural-net
+3,1,u3,1.6492E+12,1,104,5,Face to face mobile collaboration
+4,1,u1,1.64921E+12,2,166,19,Expanded next generation secured line
+5,1,u2,1.64924E+12,4,117,151,Stand-alone heuristic installation
+6,1,u2,1.64931E+12,3,159,58,Optional 24 hour interface
+7,1,u1,1.64933E+12,6,2,50,Exclusive attitude-oriented success
+8,1,u2,1.64936E+12,6,6,84,User-centric systemic customer loyalty
+9,1,u4,1.64936E+12,6,18,60,Managed systematic challenge
+10,1,u4,1.64939E+12,9,130,32,Front-line local framework
+11,1,u5,1.64939E+12,10,146,4,Front-line analyzing project
+12,1,u1,1.64954E+12,11,114,133,Front-line grid-enabled Graphical User Interface
+13,1,u1,1.64959E+12,,63,54,Inverse modular knowledge base
+14,1,u3,1.6496E+12,,76,28,Quality-focused optimizing local area network
+15,1,u2,1.64964E+12,,76,21,Optional next generation methodology
+16,1,u5,1.64967E+12,,189,72,Decentralized scalable architecture
+17,1,u4,1.64968E+12,16,194,83,Sharable encompassing access
+18,1,u5,1.64971E+12,17,36,148,Profit-focused eco-centric archive
+19,1,u1,1.64973E+12,18,22,133,Multi-tiered real-time protocol
+20,1,u2,1.64973E+12,18,199,92,Automated impactful protocol
