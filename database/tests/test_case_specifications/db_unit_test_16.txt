@@ -1,0 +1,30 @@
+Test Case ID: db_ut_16
+Test Case Title: All Message For User
+Test Case Description: Test if all messages for a user can be queried
+
+Preconditions: 
+- Database is running
+- Starter test data has been loaded
+- Database only contains starter test data
+
+
+Test Steps:
+1. SELECT * FROM messages WHERE user = "u5"
+2. Assert that the returned values match starter test data
+	11,1,u5,1.64939E+12,10,146,4,Front-line analyzing project, FALSE
+	16,1,u5,1.64967E+12,,189,72,Decentralized scalable architecture, FALSE
+	18,1,u5,1.64971E+12,17,36,148,Profit-focused eco-centric archive, FALSE
+	36,3,u5,1.65074E+12,,21,131,Total interactive info-mediaries, FALSE
+	38,3,u5,1.65077E+12,35,99,0,Robust homogeneous strategy, FALSE
+	39,5,u5,1.65082E+12,31,149,147,Managed discrete extranet, FALSE
+
+
+Expected Results:
+- Assertion should pass
+
+Postconditions:
+- Database remains unchanged
+
+Notes: Developer and tester notes
+- Starter test data for messages is in database-init/channel_1_test_messages.txt and database-init/test_data_messages.txt.
+

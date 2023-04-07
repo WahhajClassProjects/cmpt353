@@ -1,0 +1,22 @@
+Test Case ID: db_ut_20
+Test Case Title: Adding Messages TO Deleted Channel
+Test Case Description: Test if attempting is to add messages to a deleted channel is prohibited
+
+Preconditions: 
+- Database is running
+
+Test Steps:
+1. Create a new channel to test -- name = "db_ut_20", deleted = TRUE
+2. INSERT a message
+	channelID = id from step 1, senderID = "u1", timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = "db_ut_20-FAILED-TEST-STEP 2", deleted = FALSE
+3. Assert that the insertion fail
+
+Expected Results:
+- No new message is added
+
+Postconditions:
+- 
+
+Notes: Developer and tester notes
+- 
+

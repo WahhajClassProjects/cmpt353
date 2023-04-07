@@ -51,7 +51,7 @@ def testdb2_connection():
 	try:
 		testdb2Connection = pymysql.connect(
 			host="testdb2",
-			port=3307,
+			port=3306,
 			user="root",
 			db="chatdb"
 		)

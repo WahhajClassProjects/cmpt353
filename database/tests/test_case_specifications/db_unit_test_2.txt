@@ -1,5 +1,5 @@
 Test Case ID: db_ut_2
-Test Case Title: Insert New Channel In To Empty Table
+Test Case Title: Insert New Channel
 Test Case Description: Test if a new channel can be inserted into the channel table
 
 Preconditions: 

@@ -1,0 +1,52 @@
+Test Case ID: db_ut_17
+Test Case Title: Get Reply Chain
+Test Case Description: Test to see if the reply tree is properly returned
+
+Preconditions: 
+- Database is running
+- Starter test data has been loaded
+- Database only contains starter test data
+
+Test Steps:
+1. Create a recursive query
+	WITH RECURSIVE reply_tree AS (
+        -- Base case: Select the message with the given ID
+        SELECT *
+        FROM messages
+        WHERE id = 12
+
+        UNION ALL
+
+        -- Recursive case: Select the parent messages by joining the current message with its parent
+        SELECT m.*
+        FROM messages m
+        JOIN reply_tree rt ON m.id = rt.parentID
+        WHERE rt.parentID != 0 -- Terminate the recursion when there's no parent
+    )
+
+    SELECT * FROM reply_tree;
+
+2. Assert that the returned values match starter test data in channel 1
+	1,1,u1,1.64914E+12,,25,66,Secured local challenge, FALSE
+    2,1,u2,1.64918E+12,1,11,86,Reactive demand-driven neural-net, FALSE
+    3,1,u3,1.6492E+12,1,104,5,Face to face mobile collaboration, FALSE
+    4,1,u1,1.64921E+12,2,166,19,Expanded next generation secured line, FALSE
+    5,1,u2,1.64924E+12,4,117,151,Stand-alone heuristic installation, FALSE
+    6,1,u2,1.64931E+12,3,159,58,Optional 24 hour interface, FALSE
+    7,1,u1,1.64933E+12,6,2,50,Exclusive attitude-oriented success, FALSE
+    8,1,u2,1.64936E+12,6,6,84,User-centric systemic customer loyalty, FALSE
+    9,1,u4,1.64936E+12,6,18,60,Managed systematic challenge, FALSE
+    10,1,u4,1.64939E+12,9,130,32,Front-line local framework, FALSE
+    11,1,u5,1.64939E+12,10,146,4,Front-line analyzing project, FALSE
+    12,1,u1,1.64954E+12,11,114,133,Front-line grid-enabled Graphical User Interface, FALSE
+
+Expected Results:
+- Assertion passes
+
+Postconditions:
+- Database remains unchanged
+
+Notes: Developer and tester notes
+- Starter test data for messages is in database-init/channel_1_test_messages.txt
+- Diagram of channel 1 trees can be found in documentation/channel 1 messages.png
+

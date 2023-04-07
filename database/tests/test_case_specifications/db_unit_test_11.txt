@@ -1,5 +1,5 @@
 Test Case ID: db_ut_11
-Test Case Title: Editing Of Certain Field Of Messages Is Prevented
+Test Case Title: Editing Of Certain Fields Of Messages Is Prevented
 Test Case Description: In a message, the channelID, senderID, timestamp, and parentID values should not be editable
 
 Preconditions: 

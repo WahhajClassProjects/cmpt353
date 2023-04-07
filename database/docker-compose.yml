@@ -37,7 +37,7 @@ services:
       - ./tests/test_results:/app/tests/test_results
     networks:
       - test-network
-    command: sh -c "sleep 20 && python3 -m pytest -v -s . --junitxml=/app/tests/test_results/result_$(python3 -c \"from datetime import datetime; print(datetime.now().strftime('%Y-%m-%d_%H-%M-%S'))\").xml"
+    command: sh -c "sleep 5 && python3 -m pytest -v -s . --junitxml=/app/tests/test_results/result_$(python3 -c \"from datetime import datetime; print(datetime.now().strftime('%Y-%m-%d_%H-%M-%S'))\").xml"
 
 volumes:
   test_results: {}

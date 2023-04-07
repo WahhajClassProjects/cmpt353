@@ -1,24 +1,22 @@
 Test Case ID: db_ut_12
-Test Case Title:
-Test Case Description: 
+Test Case Title: Get All Users
+Test Case Description: Test to see if the entire users table can be queried
 
 Preconditions: 
-- 
+- Database is running
+- Starter test data has been loaded
+- Database only contains starter test data
 
 Test Steps:
-1. 
-2. 
-3. 
-4. 
-5. 
+1. SELECT * FROM users
+2. Assert that the queried data is identical to starter test data
 
 Expected Results:
-- 
-- 
+- Data in the table is identical to starter test data
 
 Postconditions:
-- 
+- Database remains unchanged
 
 Notes: Developer and tester notes
-- 
+- Starter test data for users is in database-init/test_data_users.txt
 

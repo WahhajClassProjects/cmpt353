@@ -1,0 +1,30 @@
+Test Case ID: db_ut_18
+Test Case Title: Deleted Fields Updated
+Test Case Description: Test of the deleted field is updated to mark an item as deleted
+
+Preconditions: 
+- Database is running
+
+Test Steps:
+1. INSERT new user into database -- id = "db_ut_18", password = "abc", name = "db_ut_18"
+2. UPDATE users SET isAdmin = TRUE WHERE id = "db_ut_18"
+3. SELECT users WHERE id = "db_ut_18"
+4. Assert that the deleted field is true
+5. INSERT new channel into database -- name = "db_ut_18"
+6. UPDATE channels SET isDeleted = TRUE WHERE name = "db_ut_18"
+7. SELECT channels WHERE name = "db_ut_18"
+8. Assert that the deleted field is true
+9. INSERT new message into db: channelID = 4, senderID = 1, timestamp = current unix time,
+   	parentID = 0, thumbsUp = 2, thumbsDown = 1, body = "db_ut_18-Step 9"
+10. UPDATE messages SET isDeleted = TRUE WHERE id = id from step 9
+11. Assert that the deleted field is true
+
+
+Expected Results:
+- Deleted fields are properly marked as TRUE
+
+Postconditions:
+- Starter test data remains unchanged
+
+Notes: Developer and tester notes
+- 

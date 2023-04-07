@@ -1,0 +1,22 @@
+Test Case ID: db_ut_21
+Test Case Title: Message From Deleted User
+Test Case Description: Test if messages from deleted users are rejected
+
+Preconditions: 
+- Database is running
+
+Test Steps:
+1. Create a new channel to test -- name = "db_ut_21"
+2. Create a new user to test -- id = "db_ut_21User", name = "db_ut_21Name", deleted = TRUE
+3. INSERT a message
+	channelID = id from step 1, senderID = "db_ut_21User", timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = "db_ut_21-FAILED-TEST-STEP 3", deleted = FALSE
+
+Expected Results:
+- A deleted user should not be able to insert messages into the database
+
+Postconditions:
+- 
+
+Notes: Developer and tester notes
+- 
+

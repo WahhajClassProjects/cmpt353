@@ -1,0 +1,24 @@
+Test Case ID: db_ut_14
+Test Case Title: Get All Messages
+Test Case Description: Test to see if the entire messages table can be queried
+
+Preconditions: 
+- Database is running
+- Starter test data has been loaded
+- Database only contains starter test data
+- Messages for channel 1 are at the start of the table. They should have ids 1-20
+
+Test Steps:
+1. SELECT * FROM channels
+2. Assert that the queried data is identical to starter test data
+
+Expected Results:
+- Data in the table is identical to starter test data
+
+Postconditions:
+- Database remains unchanged
+
+Notes: Developer and tester notes
+- Starter test data for messages is in database-init/channel_1_test_messages.txt and database-init/test_data_messages.txt.
+- Preconditions require that the data from channel_1_test_messages.txt be inserted into the database before test_data_messages.txt
+
