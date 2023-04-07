@@ -1,0 +1,22 @@
+Test Case ID: db_ut_8
+Test Case Title: Default Thumbs
+Test Case Description: Test if the thumbs defaults to 0
+
+Preconditions: 
+- Database is running
+
+Test Steps:
+1. INSERT a message -- channelID = 4, senderID = 1, timestamp = calculate in code, ParentID = 0, thumbsUp = null, thumbsDown = 1, body = "db_ut_8"
+2. SELECT message inserted in 1 and assert that thumbsUp = 0
+3. INSERT a message -- channelID = 4, senderID = 1, timestamp = calculate in code, ParentID = 0, thumbsUp = 2, thumbsDown = null, body = "db_ut_8"
+4. SELECT message inserted in 3 and assert that thumbsDown = 0
+
+Expected Results:
+- Assertions should pass
+
+Postconditions:
+- messages table has two new messages added
+
+Notes: Developer and tester notes
+- 
+

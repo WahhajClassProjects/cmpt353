@@ -1,0 +1,318 @@
+Test Case ID: db_ut_1
+Test Case Title: Check Connection
+Test Case Description: Test if the database is connected so the subsequent tests can run
+
+Preconditions:
+-
+
+Test Steps:
+1. Check the db_connection fixture is not None
+
+Expected Results:
+- db_connection should not be None
+
+Postconditions:
+- The database connection remains running after the test so subsequents tests can use it
+
+Notes: Developer and tester notes
+-
+
+Test Case ID: db_ut_2
+Test Case Title: Insert New Channel In To Empty Table
+Test Case Description: Test if a new channel can be inserted into the channel table
+
+Preconditions:
+- The database is running
+
+Test Steps:
+1. INSERT "db_ut_2" into the channels table
+2. SELECT the channel
+3. Assert the new channel exists
+4. INSERT a new channel into database name ="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" 100 a's
+5. Assert the new channel exists
+6. INSERT "db_ut_2" into the channels table
+7. SELECT all channels
+8. Assert that there are two channels with different ids but both with the same name = "db_ut_2"
+
+
+
+Expected Results:
+- All assertions are true
+- There are two channels with the same name but different ids
+- Since the second channels is inserted immediately after the first, its id should be 1 higher then the first
+
+Postconditions:
+- The channels table has three new channels added
+
+Notes: Developer and tester notes
+-
+
+Test Case ID: db_ut_3
+Test Case Title: Create New User
+Test Case Description: Test is a new user can be inserted into the users table
+
+Preconditions:
+- database is running
+
+Test Steps:
+1. INSERT new user -- id = "db_ut_3-id", password = "newUserPassword", name = "db_ut_3-name"
+2. Assert that the INSERT goes through without any errors
+3. SELECT * USERS and assert that user from step 1 is in the list with all fields identical to those in step 1
+4. INSERT new user -- id = "db_ut_3-id2", password = "newUserPassword", name = null
+5. Assert that the INSERT goes through without any errors
+6. SELECT * USERS and assert that user from step 4 is in the list with all fields  id = "db_ut_3-id2", password = "newUserPassword", name = "db_ut_3-id2"
+7. INSERT new user -- id = "db_ut_3-id2", password = "newUserPassword", name = ""
+8. Assert that the INSERT goes through without any errors
+9. SELECT * USERS and assert that user from step 4 is in the list with all fields  id = "db_ut_3-id2", password = "newUserPassword", name = "db_ut_3-id2"
+10. INSERT new user -- id = "db_ut_3-id2", password = "newUserPassword", name = " "
+11. Assert that the INSERT goes through without any errors
+12. SELECT * USERS and assert that user from step 4 is in the list with all fields  id = "db_ut_3-id2", password = "newUserPassword", name = "db_ut_3-id2"
+
+Expected Results:
+- Assertions are true
+- All users are inserted with name = id, if name was not provided
+
+Postconditions:
+- New users added to user table
+
+Notes: Developer and tester notes
+- If name is empty, then name = id by default
+
+Test Case ID: db_ut_4
+Test Case Title: Create New Message
+Test Case Description: Test if a new message can be added to the database
+
+Preconditions:
+- Database is running
+- Starter test data is in the database
+
+Test Steps:
+1. INSERT new message into db: channelID = 4, senderID = 1, timestamp = current unix time,
+	parentID = 0, thumbsUp = 2, thumbsDown = 1, body = "inserting a new message"
+2. SELECT the message by its id
+3. Assert that the returned message has the same values as those in step 1
+
+Expected Results:
+- message id > 50 as the starter test data has 50 messages
+- Assertion is true
+
+Postconditions:
+- New message has been added to database
+
+Notes: Developer and tester notes
+- parentID = 0 means no parent
+
+Test Case ID: db_ut_5
+Test Case Title: Invalid Channel Name
+Test Case Description: Test creating a new channel with invalid names
+
+Preconditions:
+- Database is running
+- Starter test data has been inserted into database
+
+Test Steps:
+1. INSERT new channel into database, name = null
+2. Assert insertion fails
+3. INSERT new channel into database, name = ""
+4. Assert insertion fails
+5. INSERT new channel into database, name = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:
+	101 a's
+6. Assert insertion fails
+
+Expected Results:
+- All three inserts should fail
+
+Postconditions:
+- Channels table remains unmodified
+
+
+Test Case ID: db_ut_6
+Test Case Title: Add Invalid Users
+Test Case Description: Test is new users with invalid values can be added
+
+Preconditions:
+- Database is running
+- Starter test data has been loaded
+
+Test Steps:
+INSERT new users with the follow invalid values. Assert that each insert fail.
+1. Invalid id -- user: id = "", password = "abc" name = "db_ut_6-FAILED-TEST-STEP 1"
+2. Invalid id -- user: id = " ", password = "abc" name = "db_ut_6-FAILED-TEST-STEP 2"
+3. Invalid id -- user: id = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"(51 a's), password = "abc" name = "db_ut_6-FAILED-TEST-STEP 2"
+4. Invalid id -- user: id = null, password = "abc" name = "db_ut_6-FAILED-TEST-STEP 4"
+5. Invalid password -- user: id = "db_ut_6", password = null,  name = "db_ut_6-FAILED-TEST-STEP 5"
+6. Invalid password -- user: id = "db_ut_6-FAILED-TEST-STEP 6", password = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"(101 a's),  name = "db_ut_6-FAILED-TEST-STEP 6"
+7. Invalid password -- user: id = "db_ut_6-FAILED-TEST-STEP 7", password = "",  name = "db_ut_6-FAILED-TEST-STEP 7"
+8. Invalid password -- user: id = "db_ut_6-FAILED-TEST-STEP 8", password = " ",  name = "db_ut_6-FAILED-TEST-STEP 8"
+9. Invalid name -- user: id = "db_ut_6-FAILED-TEST-STEP 9", password = "abc",  name = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"(51 a's)
+10. Duplicate id -- user: id = "1", password = "abc" name = "db_ut_6-FAILED-TEST-STEP 10"
+
+Expected Results:
+- All inserts should fail
+
+Postconditions:
+- Users table remains unchanged
+
+Notes: Developer and tester notes
+- If name = null or name = "", then it defaults to name = id
+
+Test Case ID: db_ut_7
+Test Case Title: Insert Invalid Message
+Test Case Description: Attempt to add invalid messages to the messages table
+
+Preconditions:
+- Database is running
+- Starter test data has been loaded
+
+Test Steps:
+INSERT the following invalid messages. Assert all insertions fail.
+1. Invalid channel ID -- channelID = 1000000, senderID = 1, timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 1"
+2. Invalid channel ID -- channelID = 0, senderID = 1, timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 2"
+3. Invalid channel ID -- channelID = -1, senderID = 1, timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 3"
+4. Invalid sender ID -- channelID = 4, senderID = -1, timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 4"
+5. Invalid sender ID -- channelID = 4, senderID = 0, timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 5"
+6. Invalid sender ID -- channelID = 4, senderID = 100000, timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 6"
+7. Invalid parent ID -- channelID = 4, senderID = 1, timestamp = current unix time, parentID = -1, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 7"
+8. Invalid parent ID -- channelID = 4, senderID = 1, timestamp = current unix time, parentID = 100000, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 8"
+9. Invalid thumbsUp -- channelID = 4, senderID = 1, timestamp = current unix time, parentID = 0, thumbsUp = -1, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 9"
+10. Invalid thumbsDown -- channelID = 4, senderID = 1, timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = -1, body = "db_ut_7-FAILED-TEST-STEP 10"
+11. Invalid body  -- channelID = 4, senderID = 1, timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = ""
+12. Invalid body  -- channelID = 4, senderID = 1, timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = " "
+13. Invalid body  -- channelID = 4, senderID = 1, timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = null
+14. Invalid body  -- channelID = 4, senderID = 1, timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = text longer than 2000 chars
+
+Expected Results:
+- All insertions should fail
+
+
+Postconditions:
+- messages table remains unchanged
+
+
+Test Case ID: db_ut_8
+Test Case Title: Default Thumbs
+Test Case Description: Test if the thumbs defaults to 0
+
+Preconditions:
+- Database is running
+
+Test Steps:
+1. INSERT a message -- channelID = 4, senderID = 1, timestamp = calculate in code, ParentID = 0, thumbsUp = null, thumbsDown = 1, body = "db_ut_8"
+2. SELECT message inserted in 1 and assert that thumbsUp = 0
+3. INSERT a message -- channelID = 4, senderID = 1, timestamp = calculate in code, ParentID = 0, thumbsUp = 2, thumbsDown = null, body = "db_ut_8"
+4. SELECT message inserted in 3 and assert that thumbsDown = 0
+
+Expected Results:
+- Assertions should pass
+
+Postconditions:
+- messages table has two new messages added
+
+Notes: Developer and tester notes
+-
+
+Test Case ID: db_ut_9
+Test Case Title: Thumbs Up and Thumbs Down Count
+Test Case Description: Test if the thumbs up and thumbs down count is properly updated
+
+Preconditions:
+- Database is running
+
+Test Steps:
+1. INSERT a message -- channelID = 4, senderID = 1, timestamp = calculate in code, ParentID = 0, thumbsUp = null, thumbsDown = null, body = "db_ut_9"
+2. Increment thumbsUp count by 1
+3. Assert thumbsUp = 1
+4. Increment thumbsDown count by 1
+5. Assert thumbsDown = 1
+6. Decrement thumbsUp count by 1
+7. Assert thumbsUp = 0
+8. Decrement thumbsUp count by 1
+9. Assert thumbsUp = 0
+10. Decrement thumbsDown count by 1
+11. Assert thumbsDown = 0
+12. Decrement thumbsUp count by 1
+13. Assert thumbsDown = 0
+
+
+Expected Results:
+- All assertions should pass
+- Counts must not go below 0
+
+Postconditions:
+- messages table has a new message
+
+Notes: Developer and tester notes
+-
+
+
+Test Case ID: db_ut_10
+Test Case Title: Valid Parent ID For Messages
+Test Case Description: Test if assigning a parentID which will cause a cycle is rejected.
+                        This is to ensure that the reply chain doesn't loop on itself and maintains a tree structure
+
+Preconditions: 
+- The database is running
+
+Test Steps:
+1. INSERT a new message -- channelID = 4, senderID = 1, timestamp = calculate in code, parentID = 0, thumbsUp = null, thumbsDown = null, body = "db_ut_10-Root Node"
+2. INSERT a new message -- channelID = 4, senderID = 1, timestamp = calculate in code, parentID = id from step 1, thumbsUp = null, thumbsDown = null, body = "db_ut_10-Child Node 1"
+3. Assert that the id and timestamp of the message from step 2 are both greater than the id and timestamp of the message from step 1
+4. Get the largest message id in the messages table
+5. INSERT a new message -- channelID = 4, senderID = 1, timestamp = calculate in code, parentID = id from step 4, thumbsUp = null, thumbsDown = null, body = "db_ut_10-FAILED-TEST-STEP 5"
+6. Assert that the insertion in step 5 fail
+7. INSERT a new message -- channelID = 4, senderID = 1, timestamp = calculate in code, parentID = id from step 4 + 1 , thumbsUp = null, thumbsDown = null, body = "db_ut_10-FAILED-TEST-STEP 7"
+8. Assert that the insertion in step 7 fail
+
+Expected Results:
+- The message in step 2 should have higher id and timestamps and their insertion should go through
+- The remaining inserts should fail
+
+Postconditions:
+- Two new messages have been added to channel 4
+
+Notes: Developer and tester notes
+- The reply chain should be a tree. If A is the root node of this tree and has a child node B, then in the database, this is represented as B's parentID = A.
+  If A's parentID = B, then this will break the tree structure because there is now a cycle. This scenario should be prevented. It can be prevented if the following is true
+  1. If message A is added to the database before B, then the both the id and timestamp of B should be larger than those of B
+  2. If message A attempts to write a parent ID equal to or larger than its own ID, then this write should be rejected, as a message cannot be a reply to itself,
+   		and it cannot be a reply to a message that doesn't yet exist
+  3. Removing entries should not alter the next value of the AUTO_INCREMENT id i.e. the id values for deleted entries are not reused.
+  		This is default behaviour, just have to make sure it isn't overridden.
+  		Also, deletion from the database will not be implemented so this is not a cause of concern.
+  4. Every message can at most have only one parent. This doesn't need to be checked as the database stores the parentID as a single integer
+  5. Prevent editing of the channelID, senderID, timestamp, and parentID values after they have been added to the database. This requires a TRIGGER which as tested separately.
+
+
+Test Case ID: db_ut_11
+Test Case Title: Editing Of Certain Field Of Messages Is Prevented
+Test Case Description: In a message, the channelID, senderID, timestamp, and parentID values should not be editable
+
+Preconditions: 
+- The database is running
+
+Test Steps:
+1. INSERT a new message and save a local copy
+ 	-- channelID = 4, senderID = 1, timestamp = calculate in code, parentID = 0, thumbsUp = null, thumbsDown = null, body = "db_ut_11-Root Node"
+2. UPDATE channelID = 2
+3. Assert UPDATE fails
+4. UPDATE senderID = 2
+5. Assert UPDATE fails
+6. UPDATE timestamp with the current unix time value
+7. Assert the UPDATE fails
+8. UPDATE parentID = 1
+9. Assert the UPDATE fails
+10. SELECT the message from step 1 and assert that it is identical to the local copy stored in step 1
+
+Expected Results:
+- The fields of the message should not have changed during the test
+
+Postconditions:
+- A new message has been added to the messages table
+
+Notes: Developer and tester notes
+- parentID 0 means no parent
+
+
+
+
+

@@ -1,0 +1,31 @@
+Test Case ID: db_ut_3
+Test Case Title: Create New User
+Test Case Description: Test is a new user can be inserted into the users table
+
+Preconditions: 
+- database is running
+
+Test Steps:
+1. INSERT new user -- id = "db_ut_3-id", password = "newUserPassword", name = "db_ut_3-name"
+2. Assert that the INSERT goes through without any errors
+3. SELECT * USERS and assert that user from step 1 is in the list with all fields identical to those in step 1
+4. INSERT new user -- id = "db_ut_3-id2", password = "newUserPassword", name = null
+5. Assert that the INSERT goes through without any errors
+6. SELECT * USERS and assert that user from step 4 is in the list with all fields  id = "db_ut_3-id2", password = "newUserPassword", name = "db_ut_3-id2"
+7. INSERT new user -- id = "db_ut_3-id2", password = "newUserPassword", name = ""
+8. Assert that the INSERT goes through without any errors
+9. SELECT * USERS and assert that user from step 4 is in the list with all fields  id = "db_ut_3-id2", password = "newUserPassword", name = "db_ut_3-id2"
+10. INSERT new user -- id = "db_ut_3-id2", password = "newUserPassword", name = " "
+11. Assert that the INSERT goes through without any errors
+12. SELECT * USERS and assert that user from step 4 is in the list with all fields  id = "db_ut_3-id2", password = "newUserPassword", name = "db_ut_3-id2"
+
+Expected Results:
+- Assertions are true
+- All users are inserted with name = id, if name was not provided
+
+Postconditions:
+- New users added to user table
+
+Notes: Developer and tester notes
+- If name is empty, then name = id by default
+

@@ -1,0 +1,29 @@
+Test Case ID: db_ut_11
+Test Case Title: Editing Of Certain Field Of Messages Is Prevented
+Test Case Description: In a message, the channelID, senderID, timestamp, and parentID values should not be editable
+
+Preconditions: 
+- The database is running
+
+Test Steps:
+1. INSERT a new message and save a local copy
+ 	-- channelID = 4, senderID = 1, timestamp = calculate in code, parentID = 0, thumbsUp = null, thumbsDown = null, body = "db_ut_11-Root Node"
+2. UPDATE channelID = 2
+3. Assert UPDATE fails
+4. UPDATE senderID = 2
+5. Assert UPDATE fails
+6. UPDATE timestamp with the current unix time value
+7. Assert the UPDATE fails
+8. UPDATE parentID = 1
+9. Assert the UPDATE fails
+10. SELECT the message from step 1 and assert that it is identical to the local copy stored in step 1
+
+Expected Results:
+- The fields of the message should not have changed during the test
+
+Postconditions:
+- A new message has been added to the messages table
+
+Notes: Developer and tester notes
+- parentID 0 means no parent
+

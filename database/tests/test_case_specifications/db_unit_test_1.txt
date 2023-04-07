@@ -1,0 +1,19 @@
+Test Case ID: db_ut_1
+Test Case Title: Check Connection
+Test Case Description: Test if the database is connected so the subsequent tests can run
+
+Preconditions: 
+- 
+
+Test Steps:
+1. Check the db_connection fixture is not None
+
+Expected Results:
+- db_connection should not be None
+
+Postconditions:
+- The database connection remains running after the test so subsequents tests can use it
+
+Notes: Developer and tester notes
+- 
+

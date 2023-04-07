@@ -1,12 +1,33 @@
-FROM mysql:latest
+FROM mysql:5-debian as base
 
-ENV MYSQL_ROOT_PASS password
-ENV MYSQL_DATABASE chatdb
-ENV MYSQL_USER ROOT
-ENV MYSQL_PASSWORD abc
+ENV MYSQL_ALLOW_EMPTY_PASSWORD=0
 
 EXPOSE 3306
 
+FROM base as dev
+COPY database-init/1.init.sql /docker-entrypoint-initdb.d/1.init.sql
 VOLUME /var/lib/mysql
-
 CMD ["mysqld"]
+
+
+FROM base as test
+
+# Install Python and required packages
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip && \
+    pip3 install pytest pymysql
+
+
+FROM test as testdb
+COPY ./database-init /docker-entrypoint-initdb.d
+CMD ["mysqld"]
+
+
+FROM test as testscripts
+WORKDIR /app
+COPY ./tests/scripts ./tests/scripts
+WORKDIR /app/tests/scripts
+CMD ["sh", "-c", "python3 -m pytest -v test_all.py --junitxml=../test_results/result_$(python3 -c \"from datetime import datetime; print(datetime.now().strftime('%Y-%m-%d_%H-%M-%S'))\").xml"]
+
+
+
