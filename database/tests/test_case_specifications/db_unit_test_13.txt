@@ -1,0 +1,23 @@
+Test Case ID: db_ut_13
+Test Case Title: Get All Channels
+Test Case Description: Test to see if the entire channels table can be queried
+
+Preconditions: 
+- Database is running
+- Starter test data has been loaded
+- Database only contains starter test data
+
+Test Steps:
+1. SELECT * FROM channels
+2. Assert that the queried data is identical to starter test data
+
+
+Expected Results:
+- Data in the table is identical to starter test data
+
+Postconditions:
+- Database remains unchanged
+
+Notes: Developer and tester notes
+- Starter test data for users is in database-init/test_channels_users.txt
+

@@ -1,0 +1,27 @@
+Test Case ID: db_ut_15
+Test Case Title: All Message For Channel
+Test Case Description: Test if all messages for a channel can be queried
+
+Preconditions: 
+- Database is running
+- Starter test data has been loaded
+- Database only contains starter test data
+
+Test Steps:
+1. SELECT * FROM messages WHERE channel = 4
+2. Assert that the returned values match starter test data for channel 4
+	28,4,u1,1.65042E+12,,104,148,Seamless bi-directional portal, FALSE
+	32,4,u2,1.65059E+12,,17,153,Focused grid-enabled attitude, FALSE
+	40,4,u3,1.65085E+12,,82,194,Up-sized user-facing parallelism, FALSE
+	43,4,u1,1.65092E+12,,120,114,Object-based eco-centric framework, FALSE
+	49,4,u3,1.65109E+12,,190,108,Synergized modular ability, FALSE
+
+Expected Results:
+- Assertion should pass
+
+Postconditions:
+- Database remains unchanged
+
+Notes: Developer and tester notes
+- Starter test data for channel 4 messages is in database-init/test_data_messages.txt.
+

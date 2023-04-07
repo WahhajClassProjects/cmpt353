@@ -1,0 +1,30 @@
+Test Case ID: db_ut_6
+Test Case Title: Add Invalid Users
+Test Case Description: Test is new users with invalid values can be added
+
+Preconditions: 
+- Database is running
+- Starter test data has been loaded
+
+Test Steps:
+INSERT new users with the follow invalid values. Assert that each insert fail.
+1. Invalid id -- user: id = "", password = "abc" name = "db_ut_6-FAILED-TEST-STEP 1"
+2. Invalid id -- user: id = " ", password = "abc" name = "db_ut_6-FAILED-TEST-STEP 2"
+3. Invalid id -- user: id = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"(51 a's), password = "abc" name = "db_ut_6-FAILED-TEST-STEP 2"
+4. Invalid id -- user: id = null, password = "abc" name = "db_ut_6-FAILED-TEST-STEP 4"
+5. Invalid password -- user: id = "db_ut_6", password = null,  name = "db_ut_6-FAILED-TEST-STEP 5"
+6. Invalid password -- user: id = "db_ut_6-FAILED-TEST-STEP 6", password = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"(129 a's),  name = "db_ut_6-FAILED-TEST-STEP 6"
+7. Invalid password -- user: id = "db_ut_6-FAILED-TEST-STEP 7", password = "",  name = "db_ut_6-FAILED-TEST-STEP 7"
+8. Invalid password -- user: id = "db_ut_6-FAILED-TEST-STEP 8", password = " ",  name = "db_ut_6-FAILED-TEST-STEP 8"
+9. Invalid name -- user: id = "db_ut_6-FAILED-TEST-STEP 9", password = "abc",  name = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"(51 a's)
+10. Duplicate id -- user: id = "1", password = "abc" name = "db_ut_6-FAILED-TEST-STEP 10"
+
+Expected Results:
+- All inserts should fail 
+
+Postconditions:
+- Users table remains unchanged
+
+Notes: Developer and tester notes
+- If name = null or name = "", then it defaults to name = id
+

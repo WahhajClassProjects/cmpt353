@@ -1,0 +1,46 @@
+#for testing the database
+
+version: '3.8'
+
+services:
+  #for tests that don't modify the database
+  testdb1:
+    container_name: testDBContainer1
+    build:
+      context: .
+      target: testdb
+    networks:
+      - test-network
+    ports:
+      - 3306:3306
+
+  #for tests that modify the database
+  testdb2:
+    container_name: testDBContainer2
+    build:
+      context: .
+      target: testdb
+    networks:
+      - test-network
+    ports:
+      - 3307:3306
+
+  testscripts:
+    container_name: testScriptsContainer
+    build:
+      context: .
+      target: testscripts
+    depends_on:
+      - testdb1
+      - testdb2
+    volumes:
+      - ./tests/test_results:/app/tests/test_results
+    networks:
+      - test-network
+    command: sh -c "sleep 5 && python3 -m pytest -v -s . --junitxml=/app/tests/test_results/result_$(python3 -c \"from datetime import datetime; print(datetime.now().strftime('%Y-%m-%d_%H-%M-%S'))\").xml"
+
+volumes:
+  test_results: {}
+networks:
+  test-network:
+

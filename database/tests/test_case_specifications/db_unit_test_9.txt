@@ -1,0 +1,33 @@
+Test Case ID: db_ut_9
+Test Case Title: Thumbs Up and Thumbs Down Count
+Test Case Description: Test if the thumbs up and thumbs down count is properly updated
+
+Preconditions: 
+- Database is running
+
+Test Steps:
+1. INSERT a message -- channelID = 4, senderID = 1, timestamp = calculate in code, ParentID = 0, thumbsUp = null, thumbsDown = null, body = "db_ut_9"
+2. Increment thumbsUp count by 1
+3. Assert thumbsUp = 1
+4. Increment thumbsDown count by 1
+5. Assert thumbsDown = 1
+6. Decrement thumbsUp count by 1
+7. Assert thumbsUp = 0
+8. Decrement thumbsUp count by 1
+9. Assert thumbsUp = 0
+10. Decrement thumbsDown count by 1
+11. Assert thumbsDown = 0
+12. Decrement thumbsUp count by 1
+13. Assert thumbsDown = 0
+
+
+Expected Results:
+- All assertions should pass
+- Counts must not go below 0
+
+Postconditions:
+- messages table has a new message
+
+Notes: Developer and tester notes
+- 
+

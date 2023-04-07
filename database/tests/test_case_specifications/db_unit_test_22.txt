@@ -1,0 +1,23 @@
+Test Case ID: db_ut_22
+Test Case Title: Failed Tests
+Test Case Description: Test if any string field in the database has the failed test string
+
+Preconditions: 
+- Database is running
+
+Test Steps:
+1. SELECT * FROM users WHERE your_column LIKE '%FAILED-TEST%';
+2. SELECT * FROM channels WHERE your_column LIKE '%FAILED-TEST%';
+3. SELECT * FROM messages WHERE your_column LIKE '%FAILED-TEST%';
+4. Assert that all three queries are empty
+
+Expected Results:
+- The "FAILED-TEST" substring is nowhere in the database
+- 
+
+Postconditions:
+- 
+
+Notes: Developer and tester notes
+- 
+

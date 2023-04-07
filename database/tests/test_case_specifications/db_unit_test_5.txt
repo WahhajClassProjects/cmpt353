@@ -1,0 +1,24 @@
+Test Case ID: db_ut_5
+Test Case Title: Invalid Channel Name
+Test Case Description: Test creating a new channel with invalid names
+
+Preconditions: 
+- Database is running
+- Starter test data has been inserted into database
+
+Test Steps:
+1. INSERT new channel into database, name = null
+2. Assert insertion fails
+3. INSERT new channel into database, name = ""
+4. Assert insertion fails
+5. INSERT new channel into database, name = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:
+	101 a's
+6. Assert insertion fails
+
+Expected Results:
+- All three inserts should fail
+
+Postconditions:
+- Channels table remains unmodified
+
+

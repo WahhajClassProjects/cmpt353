@@ -1,0 +1,30 @@
+Test Case ID: db_ut_2
+Test Case Title: Insert New Channel
+Test Case Description: Test if a new channel can be inserted into the channel table
+
+Preconditions: 
+- The database is running
+
+Test Steps:
+1. INSERT "db_ut_2" into the channels table
+2. SELECT the channel
+3. Assert the new channel exists
+4. INSERT a new channel into database name ="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" 100 a's
+5. Assert the new channel exists
+6. INSERT "db_ut_2" into the channels table
+7. SELECT all channels
+8. Assert that there are two channels with different ids but both with the same name = "db_ut_2"
+
+
+
+Expected Results:
+- All assertions are true
+- There are two channels with the same name but different ids
+- Since the second channels is inserted immediately after the first, its id should be 1 higher then the first
+
+Postconditions:
+- The channels table has three new channels added
+
+Notes: Developer and tester notes
+- 
+
