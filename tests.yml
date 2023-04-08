@@ -1,0 +1,42 @@
+#for running tests
+
+version: '3.8'
+
+services:
+  #for tests that don't modify the database
+  testdb1:
+    container_name: testDBContainer1
+    build:
+      context: ./database
+      target: testdb
+    networks:
+      - test-network
+    ports:
+      - 3306:3306
+
+  #for tests that modify the database
+  testdb2:
+    container_name: testDBContainer2
+    build:
+      context: ./database
+      target: testdb
+    networks:
+      - test-network
+    ports:
+      - 3307:3306
+
+  dbtests:
+    container_name: dbtests
+    build:
+      context: ./backend
+      target: test
+    depends_on:
+      - testdb1
+      - testdb2
+    networks:
+      - test-network
+
+
+networks:
+  test-network:
+

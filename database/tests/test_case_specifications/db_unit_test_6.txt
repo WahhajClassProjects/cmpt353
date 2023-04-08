@@ -17,7 +17,7 @@ INSERT new users with the follow invalid values. Assert that each insert fail.
 7. Invalid password -- user: id = "db_ut_6-FAILED-TEST-STEP 7", password = "",  name = "db_ut_6-FAILED-TEST-STEP 7"
 8. Invalid password -- user: id = "db_ut_6-FAILED-TEST-STEP 8", password = " ",  name = "db_ut_6-FAILED-TEST-STEP 8"
 9. Invalid name -- user: id = "db_ut_6-FAILED-TEST-STEP 9", password = "abc",  name = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"(51 a's)
-10. Duplicate id -- user: id = "1", password = "abc" name = "db_ut_6-FAILED-TEST-STEP 10"
+10. Duplicate id -- user: id = "u1", password = "abc" name = "db_ut_6-FAILED-TEST-STEP 10"
 
 Expected Results:
 - All inserts should fail 

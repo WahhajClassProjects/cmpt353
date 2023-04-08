@@ -1,15 +1,20 @@
-FROM node:19.8
+FROM node:19.8 as base
 
 WORKDIR /app
-
 COPY package.json ./
-
-RUN npm install
-
-COPY . .
-
 ENV PORT=3001
-
 EXPOSE 3001
 
+
+FROM base as prod
+WORKDIR /app
+RUN npm install --omit=dev
+COPY . .
 CMD ["npm", "start"]
+
+
+FROM base as test
+WORKDIR /app
+RUN npm install
+COPY . .
+CMD ["npm", "test"]
