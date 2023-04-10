@@ -7,6 +7,7 @@ const queries = require("../utils/dbQueries");
 //get all channels
 router.get("/", async (req, res) => {
 	try{
+		console.log("getting all channels")
 		const result = await queries.selectAllChannels(db.getConnection());
 		console.log(result);
 		res.status(200)
@@ -52,6 +53,7 @@ router.delete("/:id", async (req, res) => {
 // create new channel
 router.post("/", async (req, res) => {
 	try {
+		console.log("Request body:", req.body); // Add this line for debugging
 		const result = await queries.insertChannel(db.getConnection(), req.body.name);
 		res.status(201).json({ message: "Channel created successfully", id: result.insertId });
 	} catch (error) {

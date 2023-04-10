@@ -60,7 +60,7 @@ async function selectAllUsers(connection) {
 	return result;
 }
 
-async function selectUserById(connection) {
+async function selectUserById(connection, id) {
 	const [result] = await connection.execute(selectUserByIdQuery, [id]);
 	return result;
 }

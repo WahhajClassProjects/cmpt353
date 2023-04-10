@@ -3,19 +3,23 @@ version: "3.8"
 services:
   db:
     container_name: dbContainer
-    build: ./database
+    build:
+      context: ./database
+      target: testdb
+    environment:
+        DB_HOST: ${DB_HOST}
     ports:
       - 3306:3306
     networks:
       - chatwebsite
-    volumes:
-      - chatdb:/var/lib/mysql
+#    volumes:
+#      - chatdb:/var/lib/mysql
 
   backend:
     container_name: backendContainer
-    depends_on:
-      - db
-    build: ./backend
+    build:
+      context: ./backend
+      target: dev
     ports:
       - '3001:3001'
     networks:
@@ -23,9 +27,9 @@ services:
 
   frontend:
     container_name: frontendContainer
-    depends_on:
-      - db
-    build: ./frontend
+    build:
+      context: ./frontend
+      target: dev
     ports:
       - '3000:3000'
     networks:
