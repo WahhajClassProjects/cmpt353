@@ -1,97 +1,17 @@
+//db.tests.js
 const db = require("./dbConnections");
-
-const insertChannelQuery = "INSERT INTO channels (name) VALUEs (?)";
-const selectAllChannels = "SELECT * FROM channels";
-const selectSomeChannels = "SELECT * FROM channels WHERE id = ?";
-const insertUserQuery = "INSERT INTO users (id, password, name) VALUES (?, ?, ?)";
-const selectAllUsersQuery = "SELECT * FROM users";
-const selectUserByIdQuery = "SELECT * FROM users WHERE id = ?";
+const queries = require( "../../src/utils/dbQueries")
 
 
-async function insertChannel(channelName) {
-	const result = await db.query1(insertChannelQuery, [channelName]);
-	return {
-		affectedRows: result.affectedRows,
-		warningStatus: result.warningStatus,
-		insertId: result.insertId,
-	};
-}
-
-async function selectChannelById(id) {
-	const result = await db.query1(selectSomeChannels, [id]);
-	return result;
-}
-
-async function selectChannelsByName(name) {
-	const result = await db.query1("SELECT * FROM channels WHERE name = ?", [
-		name,
-	]);
-	return result;
-}
-
-async function insertUser(id, password, name) {
-	const result = await db.query1(insertUserQuery, [id, password, name]);
-	return {
-		affectedRows: result.affectedRows,
-		warningStatus: result.warningStatus,
-		insertId: result.insertId,
-	};
-}
-
-async function selectAllUsers() {
-	const result = await db.query1(selectAllUsersQuery, []);
-	return result;
-}
-
-async function selectUserById(id) {
-	const result = await db.query1(selectUserByIdQuery, [id]);
-	return result;
-}
-
-async function insertMessage(channelID, senderID, timestamp, parentID, thumbsUpCount, thumbsDownCount, body) {
-	if (channelID === undefined || senderID === undefined || timestamp === undefined || parentID === undefined || thumbsUpCount === undefined || thumbsDownCount === undefined || body === undefined) {
-		console.log(channelID);
-		console.log(senderID);
-		console.log(parentID);
-		console.log(thumbsUpCount);
-		console.log(thumbsDownCount);
-		console.log(body);
-
-		throw new Error("*****One or more parameters are undefined. Please check the input values.*****");
-	}
-	console.log("1");
-	const sql = `
-        INSERT INTO messages (channelID, senderID, timestamp, parentID, thumbsUpCount, thumbsDownCount, body)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
-    `;
-	const params = [channelID, senderID, timestamp, parentID, thumbsUpCount, thumbsDownCount, body];
-	console.log('2');
-	const result = await db.query1(sql, params);
-	console.log(result);
-	return {
-		affectedRows: result.affectedRows,
-		warningStatus: result.warningStatus,
-		insertId: result.insertId,
-	};
-}
-
-async function getMessageByID(messageID) {
-	const sql = `
-        SELECT * FROM messages WHERE id = ?
-    `;
-	const params = [messageID];
-	const [message] = await db.query1(sql, params);
-	return message;
-}
-/*
 test("db_ut_2", async () => {
 	const channelName = "db_ut_2";
-	let result = await insertChannel(channelName);
+	let result = await queries.insertChannel(db.getConnection1(), channelName);
+	console.log(result);
 	let insertId = result.insertId;
 	expect(result.affectedRows).toBe(1);
 	expect(result.warningStatus).toBe(0);
 
-	result = await selectChannelById(insertId);
+	result = await queries.selectChannelById(db.getConnection1(), insertId);
 	let expected = [
 		{
 			id: insertId,
@@ -102,7 +22,7 @@ test("db_ut_2", async () => {
 	expect(result).toEqual(expected);
 
 	const longChannelName = "a".repeat(100);
-	result = await insertChannel(longChannelName);
+	result = await queries.insertChannel(db.getConnection1(), longChannelName);
 	expect(result.affectedRows).toBe(1);
 	expect(result.warningStatus).toBe(0);
 
@@ -114,14 +34,14 @@ test("db_ut_2", async () => {
 			deleted: 0,
 		},
 	];
-	result = await selectChannelById(insertId);
+	result = await queries.selectChannelById(db.getConnection1(), insertId);
 	expect(result).toEqual(expected);
 
-	result = await insertChannel(channelName);
+	result = await queries.insertChannel(db.getConnection1(), channelName);
 	expect(result.affectedRows).toBe(1);
 	expect(result.warningStatus).toBe(0);
 
-	result = await selectChannelsByName(channelName);
+	result = await queries.selectChannelsByName(db.getConnection1(), channelName);
 	expect(result.length).not.toBe(1);
 	expect(result[0].id).not.toBe(result[1].id);
 });
@@ -131,11 +51,11 @@ test("db_ut_3", async () => {
 	const password = "newUserPassword";
 	const name = "db_ut_3-name";
 
-	let result = await insertUser(userId, password, name);
+	let result = await queries.insertUser(db.getConnection1(), userId, password, name);
 	expect(result.affectedRows).toBe(1);
 	expect(result.warningStatus).toBe(0);
 
-	let users = await selectAllUsers();
+	let users = await queries.selectAllUsers(db.getConnection1());
 	expect(users).toEqual(
 		expect.arrayContaining([
 			{
@@ -152,13 +72,13 @@ test("db_ut_3", async () => {
 	const nullName = null;
 
 	try {
-		await insertUser(userId2, password, nullName);
+		await queries.insertUser(db.getConnection1(), userId2, password, nullName);
 	} catch (error) {
 		expect(error).toBeDefined();
 		expect(error.message).toContain("Column 'name' cannot be null");
 	}
 
-	users = await selectAllUsers();
+	users = await queries.selectAllUsers(db.getConnection1());
 	expect(users).not.toEqual(
 		expect.arrayContaining([
 			{
@@ -175,11 +95,11 @@ test("db_ut_3", async () => {
 	const userId3 = "db_ut_3-id3"+Date.now()/100000;
 	const emptyName = "";
 
-	result = await insertUser(userId3, password, emptyName);
+	result = await queries.insertUser(db.getConnection1(), userId3, password, emptyName);
 	expect(result.affectedRows).toBe(1);
 	expect(result.warningStatus).toBe(0);
 
-	users = await selectAllUsers();
+	users = await queries.selectAllUsers(db.getConnection1());
 	expect(users).toEqual(
 		expect.arrayContaining([
 			{
@@ -196,11 +116,11 @@ test("db_ut_3", async () => {
 	const userId4 = "db_ut_3-id4"+Date.now()/100000;
 	const spaceName = " ";
 
-	result = await insertUser(userId4, password, spaceName);
+	result = await queries.insertUser(db.getConnection1(), userId4, password, spaceName);
 	expect(result.affectedRows).toBe(1);
 	expect(result.warningStatus).toBe(0);
 
-	users = await selectAllUsers();
+	users = await queries.selectAllUsers(db.getConnection1());
 	expect(users).toEqual(
 		expect.arrayContaining([
 			{
@@ -223,10 +143,10 @@ test("db_ut_4", async () => {
 	const thumbsDownCount = 1;
 	const body = 'db_ut_4';
 
-	const insertResult = await insertMessage(channelID, senderID, timestamp, parentID, thumbsUpCount, thumbsDownCount, body);
-		const messageId = insertResult.insertId;
-	const selectedMessage = await getMessageByID(messageId);
-	expect(selectedMessage).toEqual({
+	const insertResult = await queries.insertMessage(db.getConnection1(), channelID, senderID, timestamp, parentID, thumbsUpCount, thumbsDownCount, body);
+	const messageId = insertResult.insertId;
+	const selectedMessage = await queries.getMessageByID(db.getConnection1(), messageId);
+	expect(selectedMessage).toEqual([{
 		id: messageId,
 		channelID: channelID,
 		senderID: senderID,
@@ -236,13 +156,13 @@ test("db_ut_4", async () => {
 		thumbsDownCount: thumbsDownCount,
 		body: body,
 		deleted: 0
-	});
+	}]);
 })
 
 test("db_ut_5", async () => {
 	// 1. INSERT new channel into database, name = null
 	try {
-		await insertChannel(null);
+		await queries.insertChannel(db.getConnection1(), null);
 	} catch (error) {
 		// 2. Assert insertion fails
 		expect(error).toBeDefined();
@@ -251,7 +171,7 @@ test("db_ut_5", async () => {
 
 	// 3. INSERT new channel into database, name = ""
 	try {
-		await insertChannel("");
+		await queries.insertChannel(db.getConnection1(), "");
 	} catch (error) {
 		// 4. Assert insertion fails
 		expect(error).toBeDefined();
@@ -261,7 +181,7 @@ test("db_ut_5", async () => {
 	// 5. INSERT new channel into database, name = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 	const longChannelName = "a".repeat(101);
 	try {
-		await insertChannel(longChannelName);
+		await queries.insertChannel(db.getConnection1(), longChannelName);
 	} catch (error) {
 		// 6. Assert insertion fails
 		expect(error).toBeDefined();
@@ -337,7 +257,7 @@ test("db_ut_6", async () => {
 	// Run test cases
 	for (const testCase of testCases) {
 		try {
-			await insertUser(testCase.id, testCase.password, testCase.name);
+			await queries.insertUser(db.getConnection1(), testCase.id, testCase.password, testCase.name);
 		} catch (error) {
 			expect(error).toBeDefined();
 			expect(error.message).toContain(testCase.errorMsg);
@@ -493,23 +413,25 @@ test("db_ut_7", async () => {
 
 	for (const testCase of testCases) {
 		try {
-			console.log(testCase)
-			await insertMessage(testCase.channelID, testCase.senderID, testCase.timestamp, testCase.parentID, testCase.thumbsUpCount, testCase.thumbsDownCount, testCase.body);
+			//console.log(testCase)
+			await queries.insertMessage(db.getConnection1(), testCase.channelID, testCase.senderID, testCase.timestamp, testCase.parentID, testCase.thumbsUpCount, testCase.thumbsDownCount, testCase.body);
 		} catch (error) {
 			expect(error).toBeDefined();
-			console.log("Going into second expect");
-			console.log(error);
+			//console.log("Going into second expect");
+			//console.log(error);
 			expect(error.message).toContain(testCase.errorMsg);
-			console.log("After second expect");
+			//console.log("After second expect");
 		}
 	}
 });
-*/
+
+
 
 
 
 
 test("db_ut_13", async () => {
+	console.log("db_ut_13 1");
 	const expected = [
 		{ id: 1, name: "channel1", deleted: 0 },
 		{ id: 2, name: "channel2", deleted: 0 },
@@ -517,6 +439,10 @@ test("db_ut_13", async () => {
 		{ id: 4, name: "channel4", deleted: 0 },
 		{ id: 5, name: "channel5", deleted: 0 },
 	];
-	const result = await db.query2(selectAllChannels, []);
+	const result = await queries.selectAllChannels(db.getConnection2());
 	expect(result).toEqual(expected);
+
 });
+
+
+

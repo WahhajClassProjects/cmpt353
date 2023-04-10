@@ -3,12 +3,11 @@ const db = require('./dbConnections'); // Replace this with your actual database
 jest.setTimeout(200000);
 
 //let db1Connection;
-//let db2Connection;
+let db2Connection;
 
 beforeAll(async () => {
 	await db.connect1();
 	await db.connect2();
-
 });
 
 afterAll(async () => {
@@ -26,4 +25,3 @@ afterEach(async () => {
 	await db1Connection.rollback();
 	await db2Connection.rollback();
 });*/
-

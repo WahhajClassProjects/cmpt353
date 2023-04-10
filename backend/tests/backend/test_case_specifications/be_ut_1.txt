@@ -1,0 +1,21 @@
+Test Case ID: be_ut_1
+Test Case Title: Check Home Page
+Test Case Description: Test if the "/" route to homepage returns the correct response
+
+Preconditions:
+- backend server is running
+
+Test Steps:
+1. Go to localhost:3001.
+2. Assert that the return value is
+	{message: "Hello! You have reach the home page of the application. This page will have sign in and sign up features later!"}
+
+Expected Results:
+- Assertion should pass
+
+Postconditions:
+-
+
+Notes: Developer and tester notes
+-
+

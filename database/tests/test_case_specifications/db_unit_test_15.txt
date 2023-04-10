@@ -10,11 +10,11 @@ Preconditions:
 Test Steps:
 1. SELECT * FROM messages WHERE channel = 4
 2. Assert that the returned values match starter test data for channel 4
-	28,4,u1,1.65042E+12,,104,148,Seamless bi-directional portal, FALSE
-	32,4,u2,1.65059E+12,,17,153,Focused grid-enabled attitude, FALSE
-	40,4,u3,1.65085E+12,,82,194,Up-sized user-facing parallelism, FALSE
-	43,4,u1,1.65092E+12,,120,114,Object-based eco-centric framework, FALSE
-	49,4,u3,1.65109E+12,,190,108,Synergized modular ability, FALSE
+	28,4,u1,1.65042E+12,,104,148,Seamless bi-directional portal, 0
+	32,4,u2,1.65059E+12,,17,153,Focused grid-enabled attitude, 0
+	40,4,u3,1.65085E+12,,82,194,Up-sized user-facing parallelism, 0
+	43,4,u1,1.65092E+12,,120,114,Object-based eco-centric framework, 0
+	49,4,u3,1.65109E+12,,190,108,Synergized modular ability, 0
 
 Expected Results:
 - Assertion should pass

@@ -1,3 +1,4 @@
+//dbConnections.js
 // database connections that can be passed around to the tests
 
 const mysql = require("mysql2/promise");
@@ -33,7 +34,7 @@ async function connect1(){
 			await new Promise((resolve) => setTimeout(resolve, 5000));
 		}
 	}
-	//throw new Error("Failed to connect to database 1");
+	throw new Error("Failed to connect to database 1");
 
 }
 
@@ -42,17 +43,22 @@ async function connect2() {
 	while (retries) {
 		try {
 			connection2 = await mysql.createConnection(db2Config);
-			//console.log("Connected to database 2");
+			console.log("Connected to database 2");
 			return connection2;
 		} catch (error) {
-			//console.log("Error connecting to database 2");
+			console.log("Error connecting to database 2");
 			retries--;
-			//console.log(`Retries left: ${retries}`);
+			console.log(`Retries left: ${retries}`);
 			await new Promise((resolve) => setTimeout(resolve, 5000));
 		}
-		//throw new Error("Failed to connect to database 2");
-
 	}
+	throw new Error("Failed to connect to database 2");
+}
+function getConnection1(){
+	return connection1;
+}
+function getConnection2(){
+	return connection2;
 }
 
 async function close1() {
@@ -88,8 +94,8 @@ async function query2(sql, params) {
 module.exports = {
 	connect1,
 	connect2,
-	connection1,
-	connection2,
+	getConnection1,
+	getConnection2,
 	close1,
 	close2,
 	query1,
