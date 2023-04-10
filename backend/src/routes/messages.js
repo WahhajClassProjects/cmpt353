@@ -55,8 +55,10 @@ router.delete("/message/:id", async (req, res) => {
 // create message
 router.post("/", async (req, res) => {
 	try {
+		console.log("***********Creating new Message***********")
+		console.log(req.body);
 		const { channelID, senderID, timestamp, parentID, thumbsUpCount, thumbsDownCount, body } = req.body;
-		const result = await queries.insertMessage(db.getConnection(), channelID, senderID, timestamp, parentID, thumbsUpCount, thumbsDownCount, body );
+		const result = await queries.insertMessage(db.getConnection(), channelID, senderID, Date.now(), parentID, thumbsUpCount, thumbsDownCount, body );
 		const newMessageID = result.insertId;
 		const createdMessage = await queries.getMessageByID(db.getConnection(), newMessageID);
 		res.status(201).json(createdMessage[0]);
