@@ -30,7 +30,7 @@ services:
     container_name: dbtests
     build:
       context: ./backend
-      target: test
+      target: testdb
     depends_on:
       - testdb1
       - testdb2
@@ -44,6 +44,10 @@ services:
     build:
       context: ./database
       target: testdb
+    environment:
+      DB_HOST: ${DB_HOST}
+    ports:
+      - 3308:3306
     networks:
       - test-network
 
@@ -51,11 +55,14 @@ services:
     container_name: e2ebackend
     build:
       context: ./backend
-      target: prod
+      target: testbe
     depends_on:
       - e2edb
+    ports:
+      - 3001:3001
     networks:
       - test-network
+
 
   e2efrontend:
     container_name: e2efrontend
