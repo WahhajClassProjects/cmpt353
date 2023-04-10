@@ -12,6 +12,11 @@ RUN npm install --omit=dev
 COPY . .
 CMD ["npm", "start"]
 
+FROM base as dev
+WORKDIR /app
+RUN npm install
+COPY . .
+CMD ["npm", "start"]
 
 FROM base as test
 WORKDIR /app

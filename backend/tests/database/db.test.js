@@ -508,7 +508,7 @@ test("db_ut_7", async () => {
 
 
 
-/*
+
 test("db_ut_13", async () => {
 	const expected = [
 		{ id: 1, name: "channel1", deleted: 0 },
@@ -520,4 +520,3 @@ test("db_ut_13", async () => {
 	const result = await db.query2(selectAllChannels, []);
 	expect(result).toEqual(expected);
 });
- */
