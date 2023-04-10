@@ -1,0 +1,74 @@
+#for running tests
+
+version: '3.8'
+
+services:
+  #for tests that don't modify the database
+  testdb1:
+    container_name: testDBContainer1
+    build:
+      context: ./database
+      target: testdb
+    networks:
+      - test-network
+    ports:
+      - 3306:3306 #only needed if connecting from outside this container network.
+
+  #for tests that modify the database
+  testdb2:
+    container_name: testDBContainer2
+    build:
+      context: ./database
+      target: testdb
+    networks:
+      - test-network
+    ports:
+      - 3307:3306 #only needed if connecting from outside this container network.
+
+  #container which creates a backend server to run the jest unit integrations tests for the database and backend
+  dbtests:
+    container_name: dbtests
+    build:
+      context: ./backend
+      target: test
+    depends_on:
+      - testdb1
+      - testdb2
+    networks:
+      - test-network
+
+  #containers which create the entire application to run the integration and end-to-end
+  # tests at the frontend
+  e2edb:
+    container_name: e2edb
+    build:
+      context: ./database
+      target: testdb
+    networks:
+      - test-network
+
+  e2ebackend:
+    container_name: e2ebackend
+    build:
+      context: ./backend
+      target: prod
+    depends_on:
+      - e2edb
+    networks:
+      - test-network
+
+  e2efrontend:
+    container_name: e2efrontend
+    build:
+      context: ./frontend
+      target: dev
+    depends_on:
+      - e2ebackend
+    ports:
+      - 3000:3000
+    networks:
+      - test-network
+
+networks:
+  test-network:
+

@@ -7,8 +7,8 @@ Preconditions:
 - Starter test data is in the database
 
 Test Steps:
-1. INSERT new message into db: channelID = 4, senderID = 1, timestamp = current unix time,
-	parentID = 0, thumbsUp = 2, thumbsDown = 1, body = "inserting a new message"
+1. INSERT new message into db: channelID = 4, senderID = "u1", timestamp = current unix time,
+	parentID = 0, thumbsUp = 2, thumbsDown = 1, body = "db_ut_4"
 2. SELECT the message by its id
 3. Assert that the returned message has the same values as those in step 1
 

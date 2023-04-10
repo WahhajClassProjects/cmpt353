@@ -8,20 +8,20 @@ Preconditions:
 
 Test Steps:
 INSERT the following invalid messages. Assert all insertions fail.
-1. Invalid channel ID -- channelID = 1000000, senderID = 1, timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 1"
-2. Invalid channel ID -- channelID = 0, senderID = 1, timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 2"
-3. Invalid channel ID -- channelID = -1, senderID = 1, timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 3"
-4. Invalid sender ID -- channelID = 4, senderID = -1, timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 4"
-5. Invalid sender ID -- channelID = 4, senderID = 0, timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 5"
-6. Invalid sender ID -- channelID = 4, senderID = 100000, timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 6"
-7. Invalid parent ID -- channelID = 4, senderID = 1, timestamp = current unix time, parentID = -1, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 7"
-8. Invalid parent ID -- channelID = 4, senderID = 1, timestamp = current unix time, parentID = 100000, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 8"
-9. Invalid thumbsUp -- channelID = 4, senderID = 1, timestamp = current unix time, parentID = 0, thumbsUp = -1, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 9"
-10. Invalid thumbsDown -- channelID = 4, senderID = 1, timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = -1, body = "db_ut_7-FAILED-TEST-STEP 10"
-11. Invalid body  -- channelID = 4, senderID = 1, timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = ""
-12. Invalid body  -- channelID = 4, senderID = 1, timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = " "
-13. Invalid body  -- channelID = 4, senderID = 1, timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = null
-14. Invalid body  -- channelID = 4, senderID = 1, timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = text longer than 2000 chars
+1. Invalid channel ID -- channelID = 1000000, senderID = "u1", timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 1"
+2. Invalid channel ID -- channelID = 0, senderID = "u1", timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 2"
+3. Invalid channel ID -- channelID = -1, senderID = "u1", timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 3"
+4. Invalid sender ID -- channelID = 4, senderID = "", timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 4"
+5. Invalid sender ID -- channelID = 4, senderID = " ", timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 5"
+6. Invalid sender ID -- channelID = 4, senderID = "100000", timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 6"
+7. Invalid parent ID -- channelID = 4, senderID = "u1", timestamp = current unix time, parentID = -1, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 7"
+8. Invalid parent ID -- channelID = 4, senderID = "u1", timestamp = current unix time, parentID = 100000, thumbsUp = 0, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 8"
+9. Invalid thumbsUp -- channelID = 4, senderID = "u1", timestamp = current unix time, parentID = 0, thumbsUp = -1, thumbsDown = 0, body = "db_ut_7-FAILED-TEST-STEP 9"
+10. Invalid thumbsDown -- channelID = 4, senderID = "u1", timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = -1, body = "db_ut_7-FAILED-TEST-STEP 10"
+11. Invalid body  -- channelID = 4, senderID = "u1", timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = ""
+12. Invalid body  -- channelID = 4, senderID = "u1", timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = " "
+13. Invalid body  -- channelID = 4, senderID = "u1", timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = null
+14. Invalid body  -- channelID = 4, senderID = "u1", timestamp = current unix time, parentID = 0, thumbsUp = 0, thumbsDown = 0, body = text longer than 2000 chars
 
 Expected Results:
 - All insertions should fail
